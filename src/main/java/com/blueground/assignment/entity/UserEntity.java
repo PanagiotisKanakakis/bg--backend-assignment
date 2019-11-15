@@ -27,7 +27,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "PASSWORD", nullable = false, length = 45)
+    @Column(name = "PASSWORD", nullable = false, length = 256)
     public String getPassword() {
         return password;
     }
@@ -37,7 +37,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "NAME", nullable = false, length = 45)
+    @Column(name = "NAME",  length = 45)
     public String getName() {
         return name;
     }
@@ -47,7 +47,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "SURNAME", nullable = false, length = 45)
+    @Column(name = "SURNAME",  length = 45)
     public String getSurname() {
         return surname;
     }
@@ -57,7 +57,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "EMAIL", nullable = false, length = 45)
+    @Column(name = "EMAIL",  length = 45)
     public String getEmail() {
         return email;
     }
@@ -67,7 +67,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "PHONE_NUMBER", nullable = false, length = 45)
+    @Column(name = "PHONE_NUMBER", length = 45)
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -77,7 +77,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "SALT", nullable = false, length = 200)
+    @Column(name = "SALT",  length = 200)
     public String getSalt() {
         return salt;
     }
@@ -116,5 +116,19 @@ public class UserEntity {
 
     public void setReviews(List<ReviewEntity> userReviews) {
         this.reviews = userReviews;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", salt='" + salt + '\'' +
+                ", reviews=" + reviews +
+                '}';
     }
 }

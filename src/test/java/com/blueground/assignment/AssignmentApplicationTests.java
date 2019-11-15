@@ -1,13 +1,38 @@
 package com.blueground.assignment;
 
-import org.junit.jupiter.api.Test;
+import com.blueground.assignment.dao.UserRepository;
+import com.blueground.assignment.entity.UserEntity;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.junit4.SpringRunner;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest
-class AssignmentApplicationTests {
+public class AssignmentApplicationTests {
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	public AssignmentApplicationTests() {
+	}
 
 	@Test
-	void contextLoads() {
+	public void contextLoads() {
+	}
+
+	@Test
+	public void signUpUser(){
+		UserEntity userEntity = new UserEntity();
+		userEntity.setPassword(passwordEncoder.encode("1234"));
+		userEntity.setUsername("pk");
+		System.out.println(userEntity.toString());
+		userRepository.save(userEntity);
 	}
 
 }
