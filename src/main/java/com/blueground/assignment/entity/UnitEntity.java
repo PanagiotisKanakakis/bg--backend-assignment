@@ -1,5 +1,8 @@
 package com.blueground.assignment.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -110,6 +113,7 @@ public class UnitEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @JsonIgnore
     public List<ReviewEntity> getReviews() {
         return reviews;
     }

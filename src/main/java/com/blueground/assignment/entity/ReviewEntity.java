@@ -1,6 +1,11 @@
 package com.blueground.assignment.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -25,6 +30,7 @@ public class ReviewEntity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("UNIT_ID")
+    @JsonIgnore
     public UnitEntity getUnitEntity() {
         return unitEntity;
     }
@@ -35,6 +41,7 @@ public class ReviewEntity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("USERNAME")
+    @JsonIgnore
     public UserEntity getUserEntity() {
         return userEntity;
     }

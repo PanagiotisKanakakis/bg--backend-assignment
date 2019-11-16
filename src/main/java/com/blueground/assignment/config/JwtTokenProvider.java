@@ -18,8 +18,6 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider {
@@ -70,8 +68,8 @@ public class JwtTokenProvider {
 
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
+        if (bearerToken != null) {
+            return bearerToken;
         }
         return null;
     }
