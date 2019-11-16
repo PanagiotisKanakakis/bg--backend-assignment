@@ -26,13 +26,4 @@ public class AssignmentApplicationTests {
 	public void contextLoads() {
 	}
 
-	@Test
-	public void signUpUser(){
-		UserEntity userEntity = new UserEntity();
-		userEntity.setPassword(passwordEncoder.encode("1234"));
-		userEntity.setUsername("pk");
-		System.out.println(userEntity.toString());
-		userRepository.save(userEntity);
-	}
-
 }
