@@ -5,8 +5,7 @@ import com.blueground.assignment.entity.ReviewEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserResponseDTO {
-
+public class UserResponseDto {
     String username;
     List<ReviewEntity> reviews = new ArrayList<>();
     String phoneNumber;
@@ -14,13 +13,14 @@ public class UserResponseDTO {
     String surName;
     String email;
 
-    public UserResponseDTO() { }
+    public UserResponseDto() {
+    }
 
     public String getUsername() {
         return username;
     }
 
-    public UserResponseDTO setUsername(String username) {
+    public UserResponseDto setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -29,7 +29,7 @@ public class UserResponseDTO {
         return reviews;
     }
 
-    public UserResponseDTO setReviews(List<ReviewEntity> reviews) {
+    public UserResponseDto setReviews(List<ReviewEntity> reviews) {
         this.reviews = reviews;
         return this;
     }
@@ -38,7 +38,7 @@ public class UserResponseDTO {
         return phoneNumber;
     }
 
-    public UserResponseDTO setPhoneNumber(String phoneNumber) {
+    public UserResponseDto setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
     }
@@ -47,7 +47,7 @@ public class UserResponseDTO {
         return name;
     }
 
-    public UserResponseDTO setName(String firstName) {
+    public UserResponseDto setName(String firstName) {
         this.name = firstName;
         return this;
     }
@@ -56,7 +56,7 @@ public class UserResponseDTO {
         return surName;
     }
 
-    public UserResponseDTO setSurName(String lastName) {
+    public UserResponseDto setSurName(String lastName) {
         this.surName = lastName;
         return this;
     }
@@ -65,7 +65,7 @@ public class UserResponseDTO {
         return email;
     }
 
-    public UserResponseDTO setEmail(String email) {
+    public UserResponseDto setEmail(String email) {
         this.email = email;
         return this;
     }

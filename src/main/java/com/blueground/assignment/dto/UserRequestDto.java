@@ -1,6 +1,6 @@
 package com.blueground.assignment.dto;
 
-public class UserRequestDTO {
+public class UserRequestDto {
 
     private String username;
 

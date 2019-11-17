@@ -3,12 +3,13 @@ package com.blueground.assignment.entity;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Embeddable
 public class ReviewEntityPK implements Serializable {
 
+    @Column(name = "USERNAME")
     private String username;
+    @Column(name = "UNIT_ID")
     private Integer unitId;
 
     public ReviewEntityPK() {
@@ -19,7 +20,6 @@ public class ReviewEntityPK implements Serializable {
         this.unitId = unitId;
     }
 
-    @Column(name = "USERNAME")
     public String getUsername() {
         return username;
     }
@@ -28,7 +28,6 @@ public class ReviewEntityPK implements Serializable {
         this.username = username;
     }
 
-    @Column(name = "UNIT_ID")
     public Integer getUnitId() {
         return unitId;
     }
@@ -37,17 +36,4 @@ public class ReviewEntityPK implements Serializable {
         this.unitId = unitId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ReviewEntityPK that = (ReviewEntityPK) o;
-        return Objects.equals(username, that.username) &&
-                Objects.equals(unitId, that.unitId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(username, unitId);
-    }
 }

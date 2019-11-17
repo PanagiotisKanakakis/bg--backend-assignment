@@ -14,26 +14,23 @@ import java.util.Optional;
 @Service
 public class MyUserDetails implements UserDetailsService {
 
-  @Autowired
-  private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-  @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    final Optional<UserEntity> user = Optional.ofNullable(userRepository.findOne(username));
-
-    if (!user.isPresent()) {
-      throw new UsernameNotFoundException("User '" + username + "' not found");
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        final Optional<UserEntity> user = Optional.ofNullable(userRepository.findOne(username));
+        if (!user.isPresent()) {
+            throw new UsernameNotFoundException("User '" + username + "' not found");
+        }
+        return org.springframework.security.core.userdetails.User
+                .withUsername(username)
+                .password(user.get().getPassword())
+                .authorities(new SimpleGrantedAuthority("ROLE_USER"))
+                .accountExpired(false)
+                .accountLocked(false)
+                .credentialsExpired(false)
+                .disabled(false)
+                .build();
     }
-
-    return org.springframework.security.core.userdetails.User
-        .withUsername(username)
-        .password(user.get().getPassword())
-        .authorities(new SimpleGrantedAuthority("ROLE_USER"))
-        .accountExpired(false)
-        .accountLocked(false)
-        .credentialsExpired(false)
-        .disabled(false)
-        .build();
-  }
-
 }

@@ -1,16 +1,23 @@
 package com.blueground.assignment.entity;
 
-import javax.persistence.*;
-import java.util.Objects;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity(name = "Photos")
 public class PhotosEntity {
-    private Integer photoId;
-    private String path;
-    private Integer unitId;
 
     @Id
     @Column(name = "PHOTO_ID", nullable = false)
+    private Integer photoId;
+    @Basic
+    @Column(name = "PATH", nullable = false, length = 45)
+    private String path;
+    @Basic
+    @Column(name = "UNIT_ID", nullable = false)
+    private Integer unitId;
+
     public Integer getPhotoId() {
         return photoId;
     }
@@ -19,8 +26,6 @@ public class PhotosEntity {
         this.photoId = photoId;
     }
 
-    @Basic
-    @Column(name = "PATH", nullable = false, length = 45)
     public String getPath() {
         return path;
     }
@@ -29,8 +34,6 @@ public class PhotosEntity {
         this.path = path;
     }
 
-    @Basic
-    @Column(name = "UNIT_ID", nullable = false)
     public Integer getUnitId() {
         return unitId;
     }
@@ -38,21 +41,4 @@ public class PhotosEntity {
     public void setUnitId(Integer unitId) {
         this.unitId = unitId;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PhotosEntity photosEntity = (PhotosEntity) o;
-        return Objects.equals(photoId, photosEntity.photoId) &&
-                Objects.equals(path, photosEntity.path) &&
-                Objects.equals(unitId, photosEntity.unitId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(photoId, path, unitId);
-    }
-
-
 }

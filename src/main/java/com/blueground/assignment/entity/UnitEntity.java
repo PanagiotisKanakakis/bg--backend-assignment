@@ -1,25 +1,45 @@
 package com.blueground.assignment.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity(name = "Unit")
 public class UnitEntity {
-    private Integer unitId;
-    private Integer price;
-    private String title;
-    private String description;
-    private String region;
-    private String cancellationPolicy;
-    private List<PhotosEntity> photos;
-    private List<ReviewEntity> reviews;
-
     @Id
     @Column(name = "UNIT_ID", nullable = false)
+    private Integer unitId;
+    @Basic
+    @Column(name = "PRICE", nullable = false)
+    private Integer price;
+    @Basic
+    @Column(name = "TITLE", nullable = false, length = 200)
+    private String title;
+    @Basic
+    @Column(name = "DESCRIPTION", nullable = false, length = 200)
+    private String description;
+    @Basic
+    @Column(name = "REGION", nullable = false, length = 45)
+    private String region;
+    @Basic
+    @Column(name = "CANCELLATION_POLICY", nullable = true, length = 200)
+    private String cancellationPolicy;
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<PhotosEntity> photos = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "userEntity",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonIgnore
+    private List<ReviewEntity> reviews = new ArrayList<>();
+
+
     public Integer getUnitId() {
         return unitId;
     }
@@ -28,8 +48,6 @@ public class UnitEntity {
         this.unitId = unitId;
     }
 
-    @Basic
-    @Column(name = "PRICE", nullable = false)
     public Integer getPrice() {
         return price;
     }
@@ -38,8 +56,6 @@ public class UnitEntity {
         this.price = price;
     }
 
-    @Basic
-    @Column(name = "TITLE", nullable = false, length = 200)
     public String getTitle() {
         return title;
     }
@@ -48,8 +64,6 @@ public class UnitEntity {
         this.title = title;
     }
 
-    @Basic
-    @Column(name = "DESCRIPTION", nullable = false, length = 200)
     public String getDescription() {
         return description;
     }
@@ -58,8 +72,6 @@ public class UnitEntity {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "REGION", nullable = false, length = 45)
     public String getRegion() {
         return region;
     }
@@ -68,8 +80,6 @@ public class UnitEntity {
         this.region = region;
     }
 
-    @Basic
-    @Column(name = "CANCELLATION_POLICY", nullable = true, length = 200)
     public String getCancellationPolicy() {
         return cancellationPolicy;
     }
@@ -78,28 +88,6 @@ public class UnitEntity {
         this.cancellationPolicy = cancellationPolicy;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UnitEntity unitEntity = (UnitEntity) o;
-        return Objects.equals(unitId, unitEntity.unitId) &&
-                Objects.equals(price, unitEntity.price) &&
-                Objects.equals(title, unitEntity.title) &&
-                Objects.equals(description, unitEntity.description) &&
-                Objects.equals(region, unitEntity.region) &&
-                Objects.equals(cancellationPolicy, unitEntity.cancellationPolicy);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(unitId, price, title, description, region, cancellationPolicy);
-    }
-
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
     public List<PhotosEntity> getPhotos() {
         return photos;
     }
@@ -107,13 +95,7 @@ public class UnitEntity {
     public void setPhotos(List<PhotosEntity> photosEntityByUnitId) {
         this.photos = photosEntityByUnitId;
     }
-
-    @OneToMany(
-            mappedBy = "userEntity",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JsonIgnore
+    
     public List<ReviewEntity> getReviews() {
         return reviews;
     }
