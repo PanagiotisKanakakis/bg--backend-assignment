@@ -39,7 +39,7 @@ public class TokenAuthenticationServiceTest {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken("pk", "1234"));
         String token = jwtTokenProvider.createToken("pk");
         assertNotNull(token);
-        mvc.perform(MockMvcRequestBuilders.get("/unit/getAll?page=1&size=10").header("Authorization", token))
+        mvc.perform(MockMvcRequestBuilders.get("/units?page=1&size=10").header("Authorization", token))
                 .andExpect(status().isOk());
     }
 

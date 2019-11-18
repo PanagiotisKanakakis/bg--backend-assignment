@@ -6,48 +6,31 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Review")
+@Table(name = "review")
+@AssociationOverrides({
+        @AssociationOverride(name = "reviewEntityPK.userEntity",
+                joinColumns = @JoinColumn(name = "USERNAME")),
+        @AssociationOverride(name = "reviewEntityPK.unitEntity",
+                joinColumns = @JoinColumn(name = "UNIT_ID"))})
 public class ReviewEntity implements Serializable {
 
     @EmbeddedId
-    private ReviewEntityPK id;
+    @JsonIgnore
+    private ReviewEntityPK reviewEntityPK = new ReviewEntityPK();
+
     @Basic
-    @Column(name = "REVIEW", nullable = true, length = 200)
+    @Column(name = "REVIEW", length = 200)
     private String review;
     @Basic
-    @Column(name = "SCORE", nullable = true)
+    @Column(name = "SCORE")
     private Integer score;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("UNIT_ID")
-    @JsonIgnore
-    private UnitEntity unitEntity;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("USERNAME")
-    @JsonIgnore
-    private UserEntity userEntity;
 
-    public ReviewEntityPK getId() {
-        return id;
+    public ReviewEntityPK getReviewEntityPK() {
+        return reviewEntityPK;
     }
 
-    public void setId(ReviewEntityPK id) {
-        this.id = id;
-    }
-
-    public UnitEntity getUnitEntity() {
-        return unitEntity;
-    }
-
-    public void setUnitEntity(UnitEntity unitEntity) {
-        this.unitEntity = unitEntity;
-    }
-
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public void setReviewEntityPK(ReviewEntityPK reviewEntityPK) {
+        this.reviewEntityPK = reviewEntityPK;
     }
 
     public String getReview() {

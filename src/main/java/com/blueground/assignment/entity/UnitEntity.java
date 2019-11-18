@@ -1,12 +1,12 @@
 package com.blueground.assignment.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-@Entity(name = "Unit")
+@Entity(name = "unit")
 public class UnitEntity {
     @Id
     @Column(name = "UNIT_ID", nullable = false)
@@ -24,20 +24,20 @@ public class UnitEntity {
     @Column(name = "REGION", nullable = false, length = 45)
     private String region;
     @Basic
-    @Column(name = "CANCELLATION_POLICY", nullable = true, length = 200)
+    @Column(name = "CANCELLATION_POLICY", length = 200)
     private String cancellationPolicy;
+    @Basic
+    @Column(name = "AVERAGE_SCORE")
+    private Double averageScore;
+
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     private List<PhotosEntity> photos = new ArrayList<>();
-    @OneToMany(
-            mappedBy = "userEntity",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JsonIgnore
-    private List<ReviewEntity> reviews = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reviewEntityPK.unitEntity", cascade=CascadeType.ALL)
+    private Set<ReviewEntity> reviews = new HashSet<>();
 
 
     public Integer getUnitId() {
@@ -95,12 +95,20 @@ public class UnitEntity {
     public void setPhotos(List<PhotosEntity> photosEntityByUnitId) {
         this.photos = photosEntityByUnitId;
     }
-    
-    public List<ReviewEntity> getReviews() {
+
+    public Set<ReviewEntity> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<ReviewEntity> reviews) {
+    public void setReviews(Set<ReviewEntity> reviews) {
         this.reviews = reviews;
+    }
+
+    public double getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(Double averageScore) {
+        this.averageScore = averageScore;
     }
 }

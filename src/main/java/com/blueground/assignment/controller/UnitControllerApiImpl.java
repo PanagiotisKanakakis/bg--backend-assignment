@@ -22,11 +22,11 @@ public class UnitControllerApiImpl implements UnitControllerApi {
     }
 
     @Override
-    public Page<UnitResponseDto> search(@ApiParam(value = "Region", required = true) @RequestParam("region") String region,
-                                        @ApiParam(value = "Price", required = true) @RequestParam("price") String price,
+    public Page<UnitResponseDto> search(@ApiParam(value = "Region") @RequestParam(value = "region", required = false) String region,
+                                        @ApiParam(value = "Title") @RequestParam(value = "title", required = false) String title,
                                         @ApiParam(value = "Page", required = true) @RequestParam("page") Integer page,
                                         @ApiParam(value = "Size", required = true) @RequestParam("size") Integer size) throws RestException {
-        return unitServiceApi.search(page, size, region, price);
+        return unitServiceApi.search(page, size, region, title);
     }
 
     @Override

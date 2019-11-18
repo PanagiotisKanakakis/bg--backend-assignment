@@ -2,9 +2,11 @@ package com.blueground.assignment.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-@Entity(name = "Users")
+@Entity(name = "users")
 public class UserEntity {
     @Id
     @Column(name = "USERNAME", nullable = false, length = 45)
@@ -24,12 +26,8 @@ public class UserEntity {
     @Basic
     @Column(name = "PHONE_NUMBER", length = 45)
     private String phoneNumber;
-    @OneToMany(
-            mappedBy = "unitEntity",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<ReviewEntity> reviews = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reviewEntityPK.userEntity", cascade=CascadeType.ALL)
+    private Set<ReviewEntity> reviews = new HashSet<>();
 
     public String getUsername() {
         return username;
@@ -79,11 +77,11 @@ public class UserEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<ReviewEntity> getReviews() {
+    public Set<ReviewEntity> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<ReviewEntity> userReviews) {
+    public void setReviews(Set<ReviewEntity> userReviews) {
         this.reviews = userReviews;
     }
 

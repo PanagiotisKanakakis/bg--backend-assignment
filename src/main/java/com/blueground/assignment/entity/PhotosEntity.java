@@ -5,7 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name = "Photos")
+@Entity(name = "photos")
 public class PhotosEntity {
 
     @Id

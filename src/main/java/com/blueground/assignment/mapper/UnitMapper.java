@@ -1,6 +1,7 @@
 package com.blueground.assignment.mapper;
 
 import com.blueground.assignment.dto.UnitResponseDto;
+import com.blueground.assignment.entity.ReviewEntity;
 import com.blueground.assignment.entity.UnitEntity;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,9 @@ public class UnitMapper {
                 .setPrice(unitEntity.getPrice())
                 .setRegion(unitEntity.getRegion())
                 .setTitle(unitEntity.getTitle())
-                .setUnitId(unitEntity.getUnitId());
+                .setUnitId(unitEntity.getUnitId())
+                .setReviews(unitEntity.getReviews())
+                .setAverageScore(unitEntity.getAverageScore());
     }
 
 }

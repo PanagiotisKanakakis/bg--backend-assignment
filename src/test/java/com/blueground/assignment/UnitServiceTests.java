@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(SpringRunner.class)
@@ -45,7 +46,7 @@ public class UnitServiceTests {
     @Test(expected = CustomException.class)
     public void reviewWithInvalidUnit() {
         /*create review with invalid unit id*/
-        unitServiceApi.review("pk", 1, 3, "test");
+        unitServiceApi.review("pk", 222, 3, "test");
     }
 
     @Test(expected = CustomException.class)
@@ -59,6 +60,20 @@ public class UnitServiceTests {
 //        assertNotNull(unitServiceApi.review("pk",1,3, "test"));
     }
 
+    @Test(expected = CustomException.class)
+    public void invalidSearch() {
+        unitServiceApi.search(1,10,null,null);
+    }
+
+    @Test
+    public void searchByRegion() {
+        assertEquals(unitServiceApi.search(1,10,"paris",null).getTotalElements(),4);
+    }
+
+    @Test
+    public void searchByTitile() {
+        assertEquals(unitServiceApi.search(1,10,null,"one").getTotalElements(),5);
+    }
 
 
 }

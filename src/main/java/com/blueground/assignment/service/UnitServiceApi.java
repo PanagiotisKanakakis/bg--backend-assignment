@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public interface UnitServiceApi {
     Page<UnitResponseDto> getByPage(Integer page, Integer size);
 
-    Page<UnitResponseDto> search(Integer page, Integer size, String region, String price);
+    Page<UnitResponseDto> search(Integer page, Integer size, String region, String title);
 
     UnitResponseDto review(String username, Integer unitId, Integer rate, String comment);
 }

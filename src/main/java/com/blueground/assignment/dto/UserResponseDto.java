@@ -2,12 +2,13 @@ package com.blueground.assignment.dto;
 
 import com.blueground.assignment.entity.ReviewEntity;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class UserResponseDto {
     String username;
-    List<ReviewEntity> reviews = new ArrayList<>();
+    Set<ReviewEntity> reviews = new HashSet<>();
     String phoneNumber;
     String name;
     String surName;
@@ -25,11 +26,11 @@ public class UserResponseDto {
         return this;
     }
 
-    public List<ReviewEntity> getReviews() {
+    public Set<ReviewEntity> getReviews() {
         return reviews;
     }
 
-    public UserResponseDto setReviews(List<ReviewEntity> reviews) {
+    public UserResponseDto setReviews(Set<ReviewEntity> reviews) {
         this.reviews = reviews;
         return this;
     }

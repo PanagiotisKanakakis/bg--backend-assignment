@@ -1,8 +1,10 @@
 package com.blueground.assignment.dto;
 
 import com.blueground.assignment.entity.PhotosEntity;
+import com.blueground.assignment.entity.ReviewEntity;
 
 import java.util.List;
+import java.util.Set;
 
 public class UnitResponseDto {
     private Integer unitId;
@@ -11,7 +13,9 @@ public class UnitResponseDto {
     private String description;
     private String region;
     private String cancellationPolicy;
+    private double averageScore;
     private List<PhotosEntity> photos;
+    private Set<ReviewEntity> reviews;
 
     public UnitResponseDto() {
     }
@@ -76,6 +80,24 @@ public class UnitResponseDto {
 
     public UnitResponseDto setPhotos(List<PhotosEntity> photos) {
         this.photos = photos;
+        return this;
+    }
+
+    public Set<ReviewEntity> getReviews() {
+        return reviews;
+    }
+
+    public UnitResponseDto setReviews(Set<ReviewEntity> reviews) {
+        this.reviews = reviews;
+        return this;
+    }
+
+    public double getAverageScore() {
+        return averageScore;
+    }
+
+    public UnitResponseDto setAverageScore(double averageScore) {
+        this.averageScore = averageScore;
         return this;
     }
 }

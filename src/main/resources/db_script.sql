@@ -35,6 +35,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bg`.`Unit` (
   `UNIT_ID` INT NOT NULL AUTO_INCREMENT,
   `PRICE` INT NOT NULL,
+  `AVERAGE_SCORE` DOUBLE NOT NULL,
   `TITLE` VARCHAR(200) NOT NULL,
   `DESCRIPTION` VARCHAR(200) NOT NULL,
   `REGION` VARCHAR(45) NOT NULL,
@@ -66,21 +67,21 @@ ENGINE = InnoDB;
 -- Table `bg`.`Review`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bg`.`Review` (
-  `UNIT_ID` INT NOT NULL,
-  `REVIEW` VARCHAR(200) NULL,
-  `SCORE` INT NULL,
   `USERNAME` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`UNIT_ID`, `USERNAME`),
-  INDEX `fk_User_has_Residence_Residence1_idx` (`UNIT_ID` ASC),
+  `UNIT_ID` INT NOT NULL,
+  `score` INT NOT NULL,
+  `comment` VARCHAR(200) NULL,
+  PRIMARY KEY (`USERNAME`, `UNIT_ID`),
+  INDEX `fk_Review_Unit1_idx` (`UNIT_ID` ASC),
   INDEX `fk_Review_User1_idx` (`USERNAME` ASC),
-  CONSTRAINT `fk_User_has_Residence_Residence1`
-    FOREIGN KEY (`UNIT_ID`)
-    REFERENCES `bg`.`Unit` (`UNIT_ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Review_User1`
+  CONSTRAINT `fk_USERNAME`
     FOREIGN KEY (`USERNAME`)
     REFERENCES `bg`.`User` (`USERNAME`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_UNIT_ID`
+    FOREIGN KEY (`UNIT_ID`)
+    REFERENCES `bg`.`Unit` (`UNIT_ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
